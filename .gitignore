@@ -1,0 +1,4 @@
+web/wp-content/plugins
+.DS_Store
+.idea
+*.sublime*
