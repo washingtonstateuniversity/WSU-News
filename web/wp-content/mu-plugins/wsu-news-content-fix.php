@@ -21,11 +21,12 @@ class Image_Content_Fix extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp image-fix list_images --src=news.wsu.edu
+	 *     wp image-fix list --src=news.wsu.edu
 	 *
+	 * @subcommand list
 	 * @synopsis [<src-url>] [--limit=<num>] [--offset=<num>]
 	 */
-	function list_images( $args, $assoc_args ) {
+	public function _list( $args, $assoc_args ) {
 		/**
 		 * @var WPDB $wpdb
 		 */
