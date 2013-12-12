@@ -14,14 +14,20 @@ class Content_Fix extends WP_CLI_Command {
 	 *
 	 * <src-url>
 	 * : A specific source URL to check
+	 * --limit
+	 * : Number of posts to check.
 	 *
 	 * ## EXAMPLES
 	 *
 	 *     wp newsfix list_images --src=news.wsu.edu
 	 *
-	 * @synopsis <src-url>
+	 * @synopsis <src-url> [--limit=<num>]
 	 */
 	function list_images( $args, $assoc_args ) {
+		if ( isset( $assoc_args['limit'] ) ) {
+			$limit = $assoc_args['limit'];
+		}
+
 		list( $src_url ) = $args;
 
 		WP_CLI::success( $src_url );
