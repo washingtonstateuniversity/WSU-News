@@ -23,7 +23,7 @@ class Content_Fix extends WP_CLI_Command {
 	 *
 	 *     wp newsfix list_images --src=news.wsu.edu
 	 *
-	 * @synopsis <src-url> [--limit=<num>] [--offset=<num>]
+	 * @synopsis [<src-url>] [--limit=<num>] [--offset=<num>]
 	 */
 	function list_images( $args, $assoc_args ) {
 		/**
@@ -34,23 +34,26 @@ class Content_Fix extends WP_CLI_Command {
 		list( $src_url ) = $args;
 		$src_url = like_escape( $src_url );
 
+		$query = "SELECT ID, post_content FROM {$wpdb->posts} WHERE 1=1";
+
+		if ( isset( $args[0] ) ) {
+			$src_url = like_escape( $args[0] );
+			$query .= " AND post_content LIKE '%src=\"$src_url%'";
+		}
 		if ( isset( $assoc_args['limit'] ) ) {
 			$limit = absint( $assoc_args['limit'] );
-		} else {
-			$limit = 10;
+			$query .= " LIMIT $limit";
 		}
 
-		$like_query = "LIKE '%src=\"$src_url%'";
-		$query   = "SELECT ID, post_content FROM {$wpdb->posts} WHERE post_content {$like_query} LIMIT $limit";
 		echo $query;
 		echo "\n";
-		$results = $wpdb->get_results( $query );var_dump( $results );
+		$results = $wpdb->get_results( $query );
 		$inc = 0;
 		foreach( $results as $result ) {
 			$xml_parser = xml_parser_create();
 			xml_parse_into_struct( $xml_parser, $result->post_content, $pieces );
 			foreach( $pieces as $piece ) {
-				if ( 'IMG' === $piece['tag'] && 0 === strpos( $piece['attributes']['SRC'], $src_url ) ) {
+				if ( 'IMG' === $piece['tag'] ) {
 					echo $result->ID . ': ' . $piece['attributes']['SRC'];
 					echo "\n";
 					$inc++;
