@@ -3,9 +3,9 @@
 if ( defined('WP_CLI') && WP_CLI ) {
 
 /**
- * Fix content in posts.
+ * Fix image content in posts.
  */
-class Content_Fix extends WP_CLI_Command {
+class Image_Content_Fix extends WP_CLI_Command {
 
 	/**
 	 * Lists images in use on news.wsu.edu.
@@ -21,7 +21,7 @@ class Content_Fix extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp newsfix list_images --src=news.wsu.edu
+	 *     wp image-fix list_images --src=news.wsu.edu
 	 *
 	 * @synopsis [<src-url>] [--limit=<num>] [--offset=<num>]
 	 */
@@ -83,6 +83,6 @@ class Content_Fix extends WP_CLI_Command {
 	}
 }
 
-WP_CLI::add_command( 'newsfix', 'Content_Fix' );
+WP_CLI::add_command( 'image-fix', 'Image_Content_Fix' );
 
 }
