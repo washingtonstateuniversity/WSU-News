@@ -32,9 +32,6 @@ class Image_Content_Fix extends WP_CLI_Command {
 		 */
 		global $wpdb;
 
-		list( $src_url ) = $args;
-		$src_url = like_escape( $src_url );
-
 		$query = "SELECT ID, post_content FROM {$wpdb->posts} WHERE 1=1";
 
 		if ( isset( $args[0] ) ) {
@@ -46,8 +43,6 @@ class Image_Content_Fix extends WP_CLI_Command {
 			$query .= " LIMIT $limit";
 		}
 
-		echo $query;
-		echo "\n";
 		$results = $wpdb->get_results( $query );
 		$inc = 0;
 		$counter = array();
