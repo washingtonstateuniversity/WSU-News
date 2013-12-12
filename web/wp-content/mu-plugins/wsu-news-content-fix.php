@@ -50,7 +50,7 @@ class Content_Fix extends WP_CLI_Command {
 			$xml_parser = xml_parser_create();
 			xml_parse_into_struct( $xml_parser, $result->post_content, $pieces );
 			foreach( $pieces as $piece ) {
-				if ( 'IMG' === $piece['tag'] ) {
+				if ( 'IMG' === $piece['tag'] && 0 === strpos( $piece['attributes']['SRC'], $src_url ) ) {
 					echo $result->ID . ': ' . $piece['attributes']['SRC'];
 					echo "\n";
 					$inc++;
