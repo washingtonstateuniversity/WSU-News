@@ -49,17 +49,32 @@ class Content_Fix extends WP_CLI_Command {
 		echo "\n";
 		$results = $wpdb->get_results( $query );
 		$inc = 0;
+		$counter = array();
+		$path_counter = array();
 		foreach( $results as $result ) {
 			$xml_parser = xml_parser_create();
 			xml_parse_into_struct( $xml_parser, $result->post_content, $pieces );
 			foreach( $pieces as $piece ) {
 				if ( 'IMG' === $piece['tag'] ) {
-					echo $result->ID . ': ' . $piece['attributes']['SRC'];
-					echo "\n";
+					$url = parse_url( $piece['attributes']['SRC'] );
+					$counter[ $url['host'] ]++;
+					$path_counter[ $url['path'] ]++;
 					$inc++;
 				}
 			}
 
+		}
+
+		asort( $path_counter );
+		echo "\nImage by path:\n";
+		foreach( $path_counter as $path => $count ) {
+			echo zeroise( $count, 4 ) . ' - ' . $path . "\n";
+		}
+
+		asort( $counter );
+		echo "\n\nImages by domain:\n";
+		foreach( $counter as $host => $count ) {
+			echo zeroise( $count, 4 ) . ' - ' . $host . "\n";
 		}
 
 		WP_CLI::success( $inc . ' images' );
