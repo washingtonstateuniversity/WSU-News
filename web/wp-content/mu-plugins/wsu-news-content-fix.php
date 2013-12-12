@@ -26,11 +26,28 @@ class Content_Fix extends WP_CLI_Command {
 	 * @synopsis <src-url> [--limit=<num>] [--offset=<num>]
 	 */
 	function list_images( $args, $assoc_args ) {
-		if ( isset( $assoc_args['limit'] ) ) {
-			$limit = $assoc_args['limit'];
-		}
+		/**
+		 * @var WPDB $wpdb
+		 */
+		global $wpdb;
 
 		list( $src_url ) = $args;
+		$src_url = like_escape( $src_url );
+
+		if ( isset( $assoc_args['limit'] ) ) {
+			$limit = absint( $assoc_args['limit'] );
+		} else {
+			$limit = 10;
+		}
+
+		$like_query = "LIKE '%$src_url%'";
+		$query   = "SELECT ID, post_content FROM {$wpdb->posts} WHERE post_content {$like_query} LIMIT $limit";
+		$results = $wpdb->get_results( $query );
+
+		foreach( $results as $result ) {
+			echo $result->post_content;
+			echo "\n";
+		}
 
 		WP_CLI::success( $src_url );
 	}
