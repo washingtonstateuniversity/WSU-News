@@ -32,21 +32,36 @@ class Image_Content_Fix extends WP_CLI_Command {
 		 */
 		global $wpdb;
 
+		// A general query for all of the posts.
 		$query = "SELECT ID, post_content FROM {$wpdb->posts} WHERE 1=1";
 
+		// If a source URL has been specified, we can limit the query.
 		if ( isset( $args[0] ) ) {
 			$src_url = like_escape( $args[0] );
 			$query .= " AND post_content LIKE '%src=\"$src_url%'";
 		}
+
+		// If a limit has been specified, we'll add it as well.
 		if ( isset( $assoc_args['limit'] ) ) {
 			$limit = absint( $assoc_args['limit'] );
 			$query .= " LIMIT $limit";
 		}
 
 		$results = $wpdb->get_results( $query );
+
+		// General incrementor for total number of images.
 		$inc = 0;
+
+		// Incementor for tracking a per host count.
 		$counter = array();
+
+		// Incrementor for tracking a per path count.
 		$path_counter = array();
+
+		/**
+		 * Use the XML Parser to parse the text of each post_content returned and look for
+		 * instances of image tags.
+		 */
 		foreach( $results as $result ) {
 			$xml_parser = xml_parser_create();
 			xml_parse_into_struct( $xml_parser, $result->post_content, $pieces );
@@ -63,19 +78,21 @@ class Image_Content_Fix extends WP_CLI_Command {
 
 		}
 
+		// Sort the path count in ascending order and display.
 		asort( $path_counter );
 		echo "\nImage by path:\n";
 		foreach( $path_counter as $path => $count ) {
 			echo zeroise( $count, 4 ) . ' - ' . $path . "\n";
 		}
 
+		// Sort the host count in ascending order and display.
 		asort( $counter );
 		echo "\n\nImages by domain:\n";
 		foreach( $counter as $host => $count ) {
 			echo zeroise( $count, 4 ) . ' - ' . $host . "\n";
 		}
 
-		WP_CLI::success( $inc . ' images' );
+		WP_CLI::success( $inc . ' images found.' );
 	}
 }
 
