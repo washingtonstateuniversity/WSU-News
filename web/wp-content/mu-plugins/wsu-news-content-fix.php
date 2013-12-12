@@ -57,9 +57,11 @@ class Content_Fix extends WP_CLI_Command {
 			foreach( $pieces as $piece ) {
 				if ( 'IMG' === $piece['tag'] ) {
 					$url = parse_url( $piece['attributes']['SRC'] );
-					$counter[ $url['host'] ]++;
-					$path_counter[ $url['path'] ]++;
-					$inc++;
+					if ( false === strpos( $url['path'], '/wp-content/' ) ) {
+						$counter[ $url['host'] ]++;
+						$path_counter[ $url['path'] ]++;
+						$inc++;
+					}
 				}
 			}
 
