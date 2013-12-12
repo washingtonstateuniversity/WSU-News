@@ -24,7 +24,7 @@ class Image_Content_Fix extends WP_CLI_Command {
 	 *     wp image-fix list --src=news.wsu.edu
 	 *
 	 * @subcommand list
-	 * @synopsis [<src-url>] [--limit=<num>] [--offset=<num>]
+	 * @synopsis [<src-url>] [--limit=<num>]
 	 */
 	public function _list( $args, $assoc_args ) {
 		/**
