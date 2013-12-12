@@ -50,10 +50,10 @@ class Image_Content_Fix extends WP_CLI_Command {
 		$results = $wpdb->get_results( $query );
 
 		// General incrementor for total number of images.
-		$inc = 0;
+		$image_counter = 0;
 
 		// Incementor for tracking a per host count.
-		$counter = array();
+		$host_counter = array();
 
 		// Incrementor for tracking a per path count.
 		$path_counter = array();
@@ -69,9 +69,9 @@ class Image_Content_Fix extends WP_CLI_Command {
 				if ( 'IMG' === $piece['tag'] ) {
 					$url = parse_url( $piece['attributes']['SRC'] );
 					if ( false === strpos( $url['path'], '/wp-content/' ) ) {
-						$counter[ $url['host'] ]++;
+						$host_counter[ $url['host'] ]++;
 						$path_counter[ $url['path'] ]++;
-						$inc++;
+						$image_counter++;
 					}
 				}
 			}
@@ -86,13 +86,13 @@ class Image_Content_Fix extends WP_CLI_Command {
 		}
 
 		// Sort the host count in ascending order and display.
-		asort( $counter );
+		asort( $host_counter );
 		echo "\n\nImages by domain:\n";
-		foreach( $counter as $host => $count ) {
+		foreach( $host_counter as $host => $count ) {
 			echo zeroise( $count, 4 ) . ' - ' . $host . "\n";
 		}
 
-		WP_CLI::success( $inc . ' images found.' );
+		WP_CLI::success( $image_counter . ' images found.' );
 	}
 }
 
