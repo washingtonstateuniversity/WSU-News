@@ -144,6 +144,12 @@ class Image_Content_Fix extends WP_CLI_Command {
 					$url = parse_url( $piece['attributes']['SRC'] );
 					if ( 0 === strpos( $url['host'], str_replace( 'http://', '', $post_args['src-url'] ) ) && false === strpos( $url['path'], '/wp-content/' ) ) {
 						// This image should be replaced.
+						$sideload_result = media_sideload_image( $piece['attributes']['SRC'], $result->ID );
+						if ( is_wp_error( $sideload_result ) ) {
+							echo 'FAIL: ' . $piece['attributes']['SRC'] . ' ... ' . $sideload_result->get_error_message() . "\n";
+						} else {
+							echo 'SUCCESS: ' . $piece['attributes']['SRC'] . "\n";
+						}
 						$replaced_image_count++;
 					}
 				}
