@@ -173,7 +173,7 @@ class Image_Content_Fix extends WP_CLI_Command {
 		global $wpdb;
 
 		// A general query for all of the posts.
-		$query = "SELECT ID, post_content FROM {$wpdb->posts} WHERE 1=1";
+		$query = "SELECT ID, post_content FROM {$wpdb->posts} WHERE 1=1 AND post_type='post'";
 
 		// If a source URL has been specified, we can limit the query.
 		if ( isset( $post_args['src-url'] ) ) {
