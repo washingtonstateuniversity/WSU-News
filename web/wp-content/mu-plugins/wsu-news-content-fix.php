@@ -102,14 +102,59 @@ class Image_Content_Fix extends WP_CLI_Command {
 	 * : A specific source URL for images to be replaced.
 	 * --limit
 	 * : Number of posts to check for images.
+	 * --replace-limit
+	 * : Number of images to replace before bailing.
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp image-fix sideload news.wsu.edu --limit=10
+	 *     wp image-fix sideload news.wsu.edu --limit=10 --replace-limit=10
 	 *
-	 * @synopsis <src-url> [--limit=<num>]
+	 * @synopsis <src-url> [--limit=<num>] [--replace-limit]
 	 */
 	public function sideload( $args, $assoc_args ) {
+		$post_args = array();
+
+		if ( isset( $args[0] ) ) {
+			$post_args['src-url'] = $args[0];
+		}
+
+		if ( isset( $assoc_args['limit'] ) ) {
+			$post_args['limit'] = $assoc_args['limit'];
+		}
+
+		if ( isset( $assoc_args['replace-limit'] ) ) {
+			$replace_limit = $assoc_args['replace-limit'];
+		} else {
+			$replace_limit = 10;
+		}
+
+		$results = $this->get_posts( $post_args );
+
+		$replaced_image_count = 0;
+
+		/**
+		 * Use the XML Parser to parse the text of each post_content returned and look for
+		 * instances of image tags.
+		 */
+		foreach( $results as $result ) {
+			$xml_parser = xml_parser_create();
+			xml_parse_into_struct( $xml_parser, $result->post_content, $pieces );
+			foreach( $pieces as $piece ) {
+				if ( 'IMG' === $piece['tag'] ) {
+					$url = parse_url( $piece['attributes']['SRC'] );
+					if ( 0 === strpos( $url['host'], str_replace( 'http://', '', $post_args['src-url'] ) ) && false === strpos( $url['path'], '/wp-content/' ) ) {
+						// This image should be replaced.
+						$replaced_image_count++;
+					}
+				}
+
+				if ( $replaced_image_count > $replace_limit ) {
+					break 2;
+				}
+			}
+
+		}
+
 		WP_CLI::success( 'sideloaded!' );
 	}
 
