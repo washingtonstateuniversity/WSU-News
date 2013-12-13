@@ -1,4 +1,11 @@
 <?php
+/*
+Plugin Name: WSU News Image Content Fix
+Plugin URI: http://web.wsu.edu/
+Description: Used at the server level to help fix image URLs from old content.
+Author: washingtonstateuniversity, jeremyfelt
+Version: 0.1
+*/
 
 if ( defined('WP_CLI') && WP_CLI ) {
 
