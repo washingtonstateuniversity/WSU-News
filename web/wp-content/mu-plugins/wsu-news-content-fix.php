@@ -35,27 +35,17 @@ class Image_Content_Fix extends WP_CLI_Command {
 	 * @synopsis [<src-url>] [--limit=<num>]
 	 */
 	public function _list( $args, $assoc_args ) {
-		/**
-		 * @var WPDB $wpdb
-		 */
-		global $wpdb;
+		$post_args = array();
 
-		// A general query for all of the posts.
-		$query = "SELECT ID, post_content FROM {$wpdb->posts} WHERE 1=1";
-
-		// If a source URL has been specified, we can limit the query.
 		if ( isset( $args[0] ) ) {
-			$src_url = like_escape( $args[0] );
-			$query .= " AND post_content LIKE '%src=\"$src_url%'";
+			$post_args['src-url'] = $args[0];
 		}
 
-		// If a limit has been specified, we'll add it as well.
 		if ( isset( $assoc_args['limit'] ) ) {
-			$limit = absint( $assoc_args['limit'] );
-			$query .= " LIMIT $limit";
+			$post_args['limit'] = $assoc_args['limit'];
 		}
 
-		$results = $wpdb->get_results( $query );
+		$results = $this->get_posts( $post_args );
 
 		// General incrementor for total number of images.
 		$image_counter = 0;
@@ -121,6 +111,38 @@ class Image_Content_Fix extends WP_CLI_Command {
 	 */
 	public function sideload( $args, $assoc_args ) {
 		WP_CLI::success( 'sideloaded!' );
+	}
+
+	/**
+	 * Get posts matching a very basic set of criteria to match posts with images
+	 * from specific URLs.
+	 *
+	 * @param array $post_args Array of arguments to pass to the posts query.
+	 *
+	 * @return mixed Results of the query.
+	 */
+	private function get_posts( $post_args ) {
+		/**
+		 * @var WPDB $wpdb
+		 */
+		global $wpdb;
+
+		// A general query for all of the posts.
+		$query = "SELECT ID, post_content FROM {$wpdb->posts} WHERE 1=1";
+
+		// If a source URL has been specified, we can limit the query.
+		if ( isset( $post_args['src-url'] ) ) {
+			$src_url = like_escape( $post_args['src-url'] );
+			$query .= " AND post_content LIKE '%src=\"$src_url%'";
+		}
+
+		// If a limit has been specified, we'll add it as well.
+		if ( isset( $post_args['limit'] ) ) {
+			$limit = absint( $post_args['limit'] );
+			$query .= " LIMIT $limit";
+		}
+
+		return $wpdb->get_results( $query );
 	}
 }
 
