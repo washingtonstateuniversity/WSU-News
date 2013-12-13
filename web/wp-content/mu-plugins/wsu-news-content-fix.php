@@ -101,6 +101,26 @@ class Image_Content_Fix extends WP_CLI_Command {
 
 		WP_CLI::success( $image_counter . ' images found.' );
 	}
+
+	/**
+	 * Sideload images into WordPress.
+	 *
+	 * ## OPTIONS
+	 *
+	 * <src-url>
+	 * : A specific source URL for images to be replaced.
+	 * --limit
+	 * : Number of posts to check for images.
+	 *
+	 * ## EXAMPLES
+	 *
+	 *     wp image-fix sideload news.wsu.edu --limit=10
+	 *
+	 * @synopsis <src-url> [--limit=<num>]
+	 */
+	public function sideload( $args, $assoc_args ) {
+		WP_CLI::success( 'sideloaded!' );
+	}
 }
 
 WP_CLI::add_command( 'image-fix', 'Image_Content_Fix' );
