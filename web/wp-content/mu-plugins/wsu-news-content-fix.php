@@ -7,6 +7,11 @@ Author: washingtonstateuniversity, jeremyfelt
 Version: 0.1
 */
 
+//add_filter( 'sanitize_file_name', 'wsu_sanitize_image_sideload', 10, 2 );
+function wsu_sanitize_image_sideload( $filename, $filename_raw ) {
+	return str_replace( '%20', '-', $filename );
+}
+
 if ( defined('WP_CLI') && WP_CLI ) {
 
 /**
@@ -144,7 +149,7 @@ class Image_Content_Fix extends WP_CLI_Command {
 					$url = parse_url( $piece['attributes']['SRC'] );
 					if ( 0 === strpos( $url['host'], str_replace( 'http://', '', $post_args['src-url'] ) ) && false === strpos( $url['path'], '/wp-content/' ) ) {
 						// This image should be replaced.
-						$sideload_result = media_sideload_image( $piece['attributes']['SRC'], $result->ID );
+						$sideload_result = media_sideload_image( str_replace( ' ', '%20', $piece['attributes']['SRC'] ), $result->ID );
 						if ( is_wp_error( $sideload_result ) ) {
 							echo 'FAIL: ' . $piece['attributes']['SRC'] . ' ... ' . $sideload_result->get_error_message() . "\n";
 						} else {
