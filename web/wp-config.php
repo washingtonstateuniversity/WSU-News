@@ -80,6 +80,14 @@ define('WPLANG', '');
  */
 define('WP_DEBUG', false);
 define( 'SAVEQUERIES', true );
+
+/**
+ * Disable the theme and plugin editors in the admin dashboard and disable
+ * the ability to install or update plugins or themes.
+ */
+define( 'DISALLOW_FILE_EDIT', true );
+define( 'DISALLOW_FILE_MODS', true );
+
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
