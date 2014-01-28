@@ -6,3 +6,4 @@ web/wp-content/uploads
 *.sublime*
 wordpress
 wp-config.php
+wp-content/plugins/wsuwp-sso-authentication
