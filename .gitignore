@@ -4,3 +4,5 @@ web/wp-content/uploads
 .DS_Store
 .idea
 *.sublime*
+wordpress
+wp-config.php
