@@ -257,3 +257,17 @@ button, input, textarea{
 	width: 80px;
 	margin-top: 15px;
 }
+
+.attachment .hentry {
+	 background-color: transparent;
+	 margin: 0;
+	 padding: 0;
+}
+
+.image-navigation {
+	margin: 0 auto;
+	/* max-width: 1040px; */
+	position: absolute;
+	bottom: 0;
+	width: 495px;
+}
