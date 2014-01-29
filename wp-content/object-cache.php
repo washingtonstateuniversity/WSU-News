@@ -1196,7 +1196,7 @@ class WP_Object_Cache {
 	 * @return  array|bool          Returns the results or FALSE on failure.
 	 */
 	public function fetchAll() {
-		return $this->m->fetchAll();
+	 	return $this->m->fetchAll();
 	}
 
 	/**
@@ -1448,7 +1448,7 @@ class WP_Object_Cache {
 	 * @return  int     Result code of the last Memcached operation.
 	 */
 	public function getResultCode() {
-		return $this->m->getResultCode();
+ 	    return $this->m->getResultCode();
 	}
 
 	/**
@@ -1459,7 +1459,7 @@ class WP_Object_Cache {
 	 * @return  string      Message describing the result of the last Memcached operation.
 	 */
 	public function getResultMessage() {
-		return $this->m->getResultMessage();
+   	    return $this->m->getResultMessage();
 	}
 
 	/**
@@ -1486,7 +1486,7 @@ class WP_Object_Cache {
 	}
 
 	/**
-	 * Get server pool statistics.
+     * Get server pool statistics.
 	 *
 	 * @link    http://www.php.net/manual/en/memcached.getstats.php
 	 *
@@ -1894,7 +1894,7 @@ class WP_Object_Cache {
 				$derived_keys[] = $this->buildKey( $keys[$i], $groups[$i] );
 			}
 
-			// If more keys are received than groups, merge $keys[n] and $group[n] until no more group are left; remaining groups are 'default'
+		// If more keys are received than groups, merge $keys[n] and $group[n] until no more group are left; remaining groups are 'default'
 		} elseif ( count( $keys ) > count( $groups ) ) {
 			for ( $i = 0; $i < count( $keys ); $i++ ) {
 				if ( isset( $groups[$i] ) )
