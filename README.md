@@ -30,4 +30,3 @@ This repository is setup to work with the [WSUWP Indie Development](https://gith
 1. Type `vagrant plugin install vagrant-hosts`
 1. Type `vagrant up`
 1. Visit `http://dev.news.wsu.edu` in your browser.
-
