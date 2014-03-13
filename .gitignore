@@ -5,5 +5,5 @@ web/Content
 wordpress
 wp-config.php
 wp-content/plugins/wsuwp-sso-authentication
-wp-content/plugins/wsuwp-custom-css
+wp-content/plugins/wsuwp-plugin-custom-css
 wp-content/uploads
