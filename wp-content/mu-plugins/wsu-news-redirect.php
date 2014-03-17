@@ -16,6 +16,10 @@ function wsu_redirect_publication_id() {
 	/* @var WPDB $wpdb */
 	global $wpdb;
 
+	if ( ! isset( $_SERVER['HTTP_HOST'] ) ) {
+		return;
+	}
+
     //pattern: 
     //http://news.wsu.edu/pages/publications.asp?Action=Detail&PublicationID=36331&TypeID=1
 	if ( isset( $_GET['PublicationID'] ) && isset( $_GET['Action'] ) && 'Detail' === $_GET['Action'] && 0 !== absint( $_GET['PublicationID'] ) ) {
