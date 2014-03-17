@@ -148,6 +148,7 @@ class Image_Content_Fix extends WP_CLI_Command {
 		$results = $this->get_posts( $post_args );
 		$replaced_images = array();
 		$replaced_image_count = 0;
+		$secondary_replaced = 0;
 
 		/**
 		 * Use the XML Parser to parse the text of each post_content returned and look for
@@ -177,22 +178,25 @@ class Image_Content_Fix extends WP_CLI_Command {
 						$result->post_content = str_replace( $image_src, $sideload_result, $result->post_content );
 						wp_update_post( $result );
 						$replaced_images[ $image_src ] = $sideload_result;
-						echo "$sideload_result\n";
+						echo "SUCCESS: $sideload_result\n";
 					}
 					$replaced_image_count++;
 				} elseif ( 0 == strpos( $image_src, '/Content/Photos/' ) && isset( $replaced_images[ $image_src ] ) ) {
 					$result->post_content = str_replace( $image_src, $replaced_images[ $image_src ], $result->post_content );
 					wp_update_post( $result );
 					echo "Secondary update... $image_src\n";
+					$secondary_replaced++;
 				}
+			}
 
-				if ( $replaced_image_count > $replace_limit ) {
-					break 2;
-				}
+			if ( $replaced_image_count > $replace_limit ) {
+				break;
 			}
 			remove_filter( 'http_request_host_is_external', '__return_true' );
 
 		}
+
+		echo "$replaced_image_count on first round, $secondary_replaced as secondary.\n";
 
 		WP_CLI::success( 'sideloaded!' );
 	}
