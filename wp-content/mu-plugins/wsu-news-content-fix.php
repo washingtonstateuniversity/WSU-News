@@ -167,7 +167,7 @@ class Image_Content_Fix extends WP_CLI_Command {
 						// This image should be replaced.
 						$sideload_result = media_sideload_image( str_replace( ' ', '%20', 'http://news.wsu.edu' . $piece['attributes']['SRC'] ), $result->ID );
 						if ( is_wp_error( $sideload_result ) ) {
-							//echo 'FAIL: ' . $piece['attributes']['SRC'] . ' ... ' . $sideload_result->get_error_message() . "\n";
+							echo 'FAIL: ' . $piece['attributes']['SRC'] . ' ... ' . $sideload_result->get_error_message() . "\n";
 						} else {
 							echo 'SUCCESS: ' . $piece['attributes']['SRC'] . "\n";
 							$sideload_result = str_replace( "<img src='http://news.wsu.edu", '', $sideload_result );
