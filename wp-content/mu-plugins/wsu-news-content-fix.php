@@ -71,9 +71,21 @@ class Image_Content_Fix extends WP_CLI_Command {
 			foreach( $pieces as $piece ) {
 				if ( 'IMG' === $piece['tag'] ) {
 					$url = parse_url( $piece['attributes']['SRC'] );
+					if ( ! isset( $url['host'] ) ) {
+						$url['host'] = 'news.wsu.edu';
+					}
 					if ( false === strpos( $url['path'], '/wp-content/' ) ) {
-						$host_counter[ $url['host'] ]++;
-						$path_counter[ $url['path'] ]++;
+						if ( ! isset( $host_counter[ $url['host'] ] ) ) {
+							$host_counter[ $url['host'] ] = 1;
+						} else {
+							$host_counter[ $url['host'] ]++;
+						}
+						if ( ! isset( $path_counter[ $url['path'] ] ) ) {
+							$path_counter[ $url['path'] ] = 1;
+						} else {
+							$path_counter[ $url['path'] ]++;
+						}
+
 						$image_counter++;
 					}
 				}
