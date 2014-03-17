@@ -146,7 +146,7 @@ class Image_Content_Fix extends WP_CLI_Command {
 		}
 
 		$results = $this->get_posts( $post_args );
-
+		$replaced_images = array();
 		$replaced_image_count = 0;
 
 		/**
@@ -156,25 +156,40 @@ class Image_Content_Fix extends WP_CLI_Command {
 		foreach( $results as $result ) {
 			$xml_parser = xml_parser_create();
 			xml_parse_into_struct( $xml_parser, $result->post_content, $pieces );
+			add_filter( 'http_request_host_is_external', '__return_true' );
 			foreach( $pieces as $piece ) {
-				if ( 'IMG' === $piece['tag'] ) {
+				if ( 'IMG' === $piece['tag'] && isset( $piece['attributes'] ) && ! isset( $replaced_images[ $piece['attributes']['SRC'] ] ) ) {
 					$url = parse_url( $piece['attributes']['SRC'] );
+					if ( ! isset( $url['host'] ) ) {
+						$url['host'] = 'news.wsu.edu';
+					}
 					if ( 0 === strpos( $url['host'], str_replace( 'http://', '', $post_args['src-url'] ) ) && false === strpos( $url['path'], '/wp-content/' ) ) {
 						// This image should be replaced.
-						$sideload_result = media_sideload_image( str_replace( ' ', '%20', $piece['attributes']['SRC'] ), $result->ID );
+						$sideload_result = media_sideload_image( str_replace( ' ', '%20', 'http://news.wsu.edu' . $piece['attributes']['SRC'] ), $result->ID );
 						if ( is_wp_error( $sideload_result ) ) {
-							echo 'FAIL: ' . $piece['attributes']['SRC'] . ' ... ' . $sideload_result->get_error_message() . "\n";
+							//echo 'FAIL: ' . $piece['attributes']['SRC'] . ' ... ' . $sideload_result->get_error_message() . "\n";
 						} else {
 							echo 'SUCCESS: ' . $piece['attributes']['SRC'] . "\n";
+							$sideload_result = str_replace( "<img src='http://news.wsu.edu", '', $sideload_result );
+							$sideload_result = str_replace( "' alt='' />", '', $sideload_result );
+							$sideload_result = trim( $sideload_result );
+							$result->post_content = str_replace( $piece['attributes']['SRC'], $sideload_result, $result->post_content );
+							wp_update_post( $result );
+							$replaced_images[ $piece['attributes']['SRC'] ] = $sideload_result;
+							echo "$sideload_result\n";
 						}
 						$replaced_image_count++;
 					}
+				} elseif ( 'IMG' === $piece['tag'] && isset( $piece['attributes'] ) &&  isset( $replaced_images[ $piece['attributes']['SRC'] ] ) ) {
+					$result->post_content = str_replace( $piece['attributes']['SRC'], $replaced_images[ $piece['attributes']['SRC'] ], $result->post_content );
+					wp_update_post( $result );
 				}
 
 				if ( $replaced_image_count > $replace_limit ) {
 					break 2;
 				}
 			}
+			remove_filter( 'http_request_host_is_external', '__return_true' );
 
 		}
 
@@ -201,7 +216,7 @@ class Image_Content_Fix extends WP_CLI_Command {
 		// If a source URL has been specified, we can limit the query.
 		if ( isset( $post_args['src-url'] ) ) {
 			$src_url = like_escape( $post_args['src-url'] );
-			$query .= " AND post_content LIKE '%src=\"$src_url%'";
+			$query .= " AND post_content LIKE '%src=\"/Content/Photos/%'";
 		}
 
 		// If a limit has been specified, we'll add it as well.
