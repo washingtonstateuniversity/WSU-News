@@ -7,7 +7,7 @@ Author: washingtonstateuniversity, jeremyfelt
 Version: 0.1
 */
 
-//add_filter( 'sanitize_file_name', 'wsu_sanitize_image_sideload', 10, 2 );
+add_filter( 'sanitize_file_name', 'wsu_sanitize_image_sideload', 10, 2 );
 function wsu_sanitize_image_sideload( $filename, $filename_raw ) {
 	return str_replace( '%20', '-', $filename );
 }
