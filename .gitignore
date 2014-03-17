@@ -1,6 +1,11 @@
-web/Content
-web/wp-content/plugins
-web/wp-content/uploads
+/Content
 .DS_Store
 .idea
 *.sublime*
+
+wordpress
+wp-config.php
+
+wp-content/plugins/wsuwp-sso-authentication
+wp-content/plugins/wsuwp-plugin-custom-css
+wp-content/uploads
