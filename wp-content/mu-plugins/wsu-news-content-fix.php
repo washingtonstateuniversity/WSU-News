@@ -148,50 +148,55 @@ class Image_Content_Fix extends WP_CLI_Command {
 		$results = $this->get_posts( $post_args );
 		$replaced_images = array();
 		$replaced_image_count = 0;
+		$secondary_replaced = 0;
 
 		/**
 		 * Use the XML Parser to parse the text of each post_content returned and look for
 		 * instances of image tags.
 		 */
 		foreach( $results as $result ) {
-			$xml_parser = xml_parser_create();
-			xml_parse_into_struct( $xml_parser, $result->post_content, $pieces );
+			$result_dom = new DOMDocument();
+			@$result_dom->loadHtml( $result->post_content );
+
 			add_filter( 'http_request_host_is_external', '__return_true' );
-			foreach( $pieces as $piece ) {
-				if ( 'IMG' === $piece['tag'] && isset( $piece['attributes'] ) && ! isset( $replaced_images[ $piece['attributes']['SRC'] ] ) ) {
-					$url = parse_url( $piece['attributes']['SRC'] );
-					if ( ! isset( $url['host'] ) ) {
-						$url['host'] = 'news.wsu.edu';
-					}
-					if ( 0 === strpos( $url['host'], str_replace( 'http://', '', $post_args['src-url'] ) ) && false === strpos( $url['path'], '/wp-content/' ) ) {
-						// This image should be replaced.
-						$sideload_result = media_sideload_image( str_replace( ' ', '%20', 'http://news.wsu.edu' . $piece['attributes']['SRC'] ), $result->ID );
-						if ( is_wp_error( $sideload_result ) ) {
-							echo 'FAIL: ' . $piece['attributes']['SRC'] . ' ... ' . $sideload_result->get_error_message() . "\n";
-						} else {
-							echo 'SUCCESS: ' . $piece['attributes']['SRC'] . "\n";
-							$sideload_result = str_replace( "<img src='http://news.wsu.edu", '', $sideload_result );
-							$sideload_result = str_replace( "' alt='' />", '', $sideload_result );
-							$sideload_result = trim( $sideload_result );
-							$result->post_content = str_replace( $piece['attributes']['SRC'], $sideload_result, $result->post_content );
-							wp_update_post( $result );
-							$replaced_images[ $piece['attributes']['SRC'] ] = $sideload_result;
-							echo "$sideload_result\n";
-						}
-						$replaced_image_count++;
-					}
-				} elseif ( 'IMG' === $piece['tag'] && isset( $piece['attributes'] ) &&  isset( $replaced_images[ $piece['attributes']['SRC'] ] ) ) {
-					$result->post_content = str_replace( $piece['attributes']['SRC'], $replaced_images[ $piece['attributes']['SRC'] ], $result->post_content );
-					wp_update_post( $result );
+
+			foreach( $result_dom->getElementsByTagName( 'img' ) as $image ) {
+				if ( false === $image->hasAttribute( 'src' ) ) {
+					continue;
 				}
 
-				if ( $replaced_image_count > $replace_limit ) {
-					break 2;
+				$image_src = $image->getAttribute( 'src' );
+				if ( 0 == strpos( $image_src, '/Content/Photos/' ) && ! isset( $replaced_images[ $image_src ] ) ) {
+					$sideload_result = media_sideload_image( str_replace( ' ', '%20', 'http://news.wsu.edu' . $image_src ), $result->ID );
+					if ( is_wp_error( $sideload_result ) ) {
+						echo 'FAIL: ' . $image_src . ' ... ' . $sideload_result->get_error_message() . "\n";
+					} else {
+						echo 'SUCCESS: ' . $image_src . "\n";
+						$sideload_result = str_replace( "<img src='http://news.wsu.edu", '', $sideload_result );
+						$sideload_result = str_replace( "' alt='' />", '', $sideload_result );
+						$sideload_result = trim( $sideload_result );
+						$result->post_content = str_replace( $image_src, $sideload_result, $result->post_content );
+						wp_update_post( $result );
+						$replaced_images[ $image_src ] = $sideload_result;
+						echo "SUCCESS: $sideload_result\n";
+					}
+					$replaced_image_count++;
+				} elseif ( 0 == strpos( $image_src, '/Content/Photos/' ) && isset( $replaced_images[ $image_src ] ) ) {
+					$result->post_content = str_replace( $image_src, $replaced_images[ $image_src ], $result->post_content );
+					wp_update_post( $result );
+					echo "Secondary update... $image_src\n";
+					$secondary_replaced++;
 				}
+			}
+
+			if ( $replaced_image_count > $replace_limit ) {
+				break;
 			}
 			remove_filter( 'http_request_host_is_external', '__return_true' );
 
 		}
+
+		echo "$replaced_image_count on first round, $secondary_replaced as secondary.\n";
 
 		WP_CLI::success( 'sideloaded!' );
 	}
