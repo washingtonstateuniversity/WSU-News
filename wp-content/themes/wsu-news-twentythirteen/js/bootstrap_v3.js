@@ -43,8 +43,8 @@ function load_base(url) {
 							var _DN    = param("domainName", url );
 							var _CP    = param("cookiePath", url );
 
-							var url='//images.wsu.edu/javascripts/tracking/configs/pick.asp';
-							jQuery.getJSON(url+'?callback=?'+(_load!=false?'&loading='+_load:''), function(data){
+							var url='/wp-content/themes/wsu-news-twentythirteen/js/jtrackconfig.json';
+							jQuery.getJSON(url), function(data){
 								jQuery.jtrack.defaults.debug.run = false;
 								jQuery.jtrack.defaults.debug.v_console = false;
 								jQuery.jtrack.defaults.debug.console = true;
