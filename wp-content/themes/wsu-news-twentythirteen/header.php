@@ -34,17 +34,7 @@
 	<?php wp_head(); ?>
 	
     <script type='text/javascript' src='//images.wsu.edu/javascripts/tracking/bootstrap_v3.js?gacode=UA-6322839-2&amp;loading=element_v2&amp;domainName=news.wsu.edu/'  id='tracker_agent'></script>
-	<!--<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-	  ga('create', 'UA-6322839-2', 'wsu.edu');
-	  ga('send', 'pageview');
-
-	</script>-->
-	
 </head>
 
 <body <?php body_class(); ?>>
