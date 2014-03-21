@@ -20,6 +20,20 @@ class WSU_News_Twentythirteen {
 		add_action( 'wp_enqueue_scripts', array( $this, 'modify_header'     ), 21 );
 
 		add_filter( 'the_content_more_link', array( $this, 'the_content_more_link' ), 10, 2 );
+		add_filter( 'style_loader_tag', array( $this, 'strip_style_ids' ), 10, 2 );
+	}
+
+	/**
+	 * Strip IDs from stylesheet links so that pagespeed can automatically concatenate them.
+	 *
+	 * @param string $style_output Current link element being output.
+	 * @param string $handle       Identifier of the link element.
+	 *
+	 * @return string New link element. Sweet.
+	 */
+	public function strip_style_ids( $style_output, $handle ) {
+		$style_output = str_replace( "id='$handle-css'", '', $style_output );
+		return $style_output;
 	}
 
 	/**
