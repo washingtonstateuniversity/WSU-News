@@ -31,7 +31,6 @@
 
 	<!--Cougar Head favicon-->
 	<link rel="shortcut icon" href="http://news.wsu.edu/favicon.ico" />
-	<link rel="prefetch" href="http://themes.googleusercontent.com/static/fonts/opensanscondensed/v7/gk5FxslNkTTHtojXrkp-xM6Eyu0BCqAfob_z3hhzRFzr7w4p9aSvGirXi6XmeXNA.woff">
 	<?php wp_head(); ?>
 </head>
 
