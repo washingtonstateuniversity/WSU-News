@@ -9,7 +9,7 @@ class WSU_News_Twentythirteen {
 	/**
 	 * @var string Version of CSS / JS for cache breaking.
 	 */
-	var $script_version = '20140321-01';
+	var $script_version = '20140321-03';
 
 	/**
 	 * Hook in where needed when the theme is loaded.
@@ -49,11 +49,14 @@ class WSU_News_Twentythirteen {
 	 * Open Sans Condensed for quite a bit. There are a few things that still
 	 * use Source Sans Pro, so we should continue to include that.
 	 *
+	 * These font-face rules are now included in wsu-template.css so that we
+	 * don't need to go to a new domain to find them.
+	 *
 	 * @todo revisit use of Bitter.
 	 */
 	public function modify_header() {
 		wp_dequeue_style( 'twentythirteen-fonts' );
-		wp_enqueue_style( 'wsu-news-fonts', 'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic|Bitter:400,700|Open+Sans+Condensed:300,700,300italic', array(), null );
+		//wp_enqueue_style( 'wsu-news-fonts', 'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic|Bitter:400,700|Open+Sans+Condensed:300,700,300italic', array(), null );
 	}
 
 	/**
