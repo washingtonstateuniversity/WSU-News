@@ -15,7 +15,7 @@ class WSU_News_Twentythirteen {
 	 * Hook in where needed when the theme is loaded.
 	 */
 	public function __construct() {
-		add_action( 'after_setup_theme',  array( $this, 'setup_child_theme' ), 11 );
+		add_action( 'after_setup_theme',  array( $this, 'setup_child_theme' ), 12 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'setup_header'      ),  9 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'modify_header'     ), 21 );
 
@@ -29,6 +29,7 @@ class WSU_News_Twentythirteen {
 		remove_editor_styles();
 		add_editor_style( get_stylesheet_directory_uri() . '/editor-style.css' );
 		register_nav_menu( 'featured', 'Featured Menu' );
+		remove_theme_support( 'custom-header' );
 	}
 
 	/**
