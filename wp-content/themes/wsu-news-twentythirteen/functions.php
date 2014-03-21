@@ -19,6 +19,10 @@ class WSU_News_Twentythirteen {
 		add_action( 'wp_enqueue_scripts', array( $this, 'setup_header'      ),  9 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'modify_header'     ), 21 );
 
+		// Remove default core actions for support of Windows Live Writer.
+		remove_action('wp_head', 'wlwmanifest_link');
+		remove_action('wp_head', 'rsd_link');
+
 		add_filter( 'the_content_more_link', array( $this, 'the_content_more_link' ), 10, 2 );
 		add_filter( 'style_loader_tag', array( $this, 'strip_style_ids' ), 10, 2 );
 	}
