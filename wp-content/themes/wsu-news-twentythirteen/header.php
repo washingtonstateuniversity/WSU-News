@@ -34,23 +34,13 @@
 	<?php wp_head(); ?>
 	
     <script type='text/javascript' src='//images.wsu.edu/javascripts/tracking/bootstrap_v3.js?gacode=UA-6322839-2&amp;loading=element_v2&amp;domainName=news.wsu.edu/'  id='tracker_agent'></script>
-	<!--<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-	  ga('create', 'UA-6322839-2', 'wsu.edu');
-	  ga('send', 'pageview');
-
-	</script>-->
-	
 </head>
 
 <body <?php body_class(); ?>>
 	<!--Beginning of the WSU Identifier Zone. Refer to http://identity.wsu.edu/ for more information. -->
 	<div id = "wrapper">
-		<noscript><div id='globalnav'><ul><li>Washington State University</li></ul></div><div id='logo'><a href='http://www.wsu.edu'><img src='http://images.wsu.edu/global/bg-logo.jpg' alt="WSU Logo"/></a></div></noscript>
+		<noscript><div id='globalnav'><ul><li>Washington State University</li></ul></div><div id='logo'><a href='http://www.wsu.edu'><img src='<?php echo get_stylesheet_directory_uri() . '/css/images/bg-logo.jpg'; ?>' alt="WSU Logo"/></a></div></noscript>
 		<script language="Javascript" src="http://images.wsu.edu/javascripts/wsuidentifierV2.js" type="text/javascript"></script>
 		<script language="javascript" type="text/javascript"> var strHeader; strHeader = getHeader(); document.write(strHeader);</script>
 	<!--End of the WSU Identifier Zone. -->

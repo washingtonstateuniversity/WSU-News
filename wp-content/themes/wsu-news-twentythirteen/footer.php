@@ -48,10 +48,5 @@
 <script language="javascript" type="text/javascript">var strFooter;strFooter = getFooter();document.write(strFooter);</script>
 <!--End of the WSU Global Footer Zone. -->
 
-<!--The code below is for the print tool in the toolbar-->
-<script type="text/javascript">
-   // To display the "Print" link pass in true.  To hide the "Print" link pass in false.
-   addPrintLink(true);
-</script> 
 </body>
 </html>
