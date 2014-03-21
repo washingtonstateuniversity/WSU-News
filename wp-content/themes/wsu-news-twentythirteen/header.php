@@ -38,7 +38,7 @@
 	<!--Beginning of the WSU Identifier Zone. Refer to http://identity.wsu.edu/ for more information. -->
 	<div id = "wrapper">
 		<noscript><div id='globalnav'><ul><li>Washington State University</li></ul></div><div id='logo'><a href='http://www.wsu.edu'><img src='<?php echo get_stylesheet_directory_uri() . '/css/images/bg-logo.jpg'; ?>' alt="WSU Logo"/></a></div></noscript>
-		<script language="Javascript" src="<?php echo get_stylesheet_directory_uri() . '/js/wsuidentifierV2.js?20140320-03'; ?>" type="text/javascript"></script>
+		<script language="Javascript" src="<?php echo get_stylesheet_directory_uri() . '/js/wsuidentifierV2.js?20140320-04'; ?>" type="text/javascript"></script>
 		<script language="javascript" type="text/javascript"> var strHeader; strHeader = getHeader(); document.write(strHeader);</script>
 	<!--End of the WSU Identifier Zone. -->
 		<div id="siteID">
