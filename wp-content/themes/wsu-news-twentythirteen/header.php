@@ -30,7 +30,7 @@
 	<![endif]-->
 
 	<!--Cougar Head favicon-->
-	<link rel="shortcut icon" href="http://images.wsu.edu/favicon.ico" />
+	<link rel="shortcut icon" href="http://news.wsu.edu/favicon.ico" />
 	<?php wp_head(); ?>
 	
     <script type='text/javascript' src='//images.wsu.edu/javascripts/tracking/bootstrap_v3.js?gacode=UA-6322839-2&amp;loading=element_v2&amp;domainName=news.wsu.edu/'  id='tracker_agent'></script>
