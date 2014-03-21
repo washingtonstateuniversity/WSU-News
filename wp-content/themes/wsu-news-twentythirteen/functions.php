@@ -7,6 +7,11 @@
 class WSU_News_Twentythirteen {
 
 	/**
+	 * @var string Version of CSS / JS for cache breaking.
+	 */
+	var $script_version = '20140321-01';
+
+	/**
 	 * Hook in where needed when the theme is loaded.
 	 */
 	public function __construct() {
@@ -33,8 +38,8 @@ class WSU_News_Twentythirteen {
 	 * in the parent theme.
 	 */
 	public function setup_header() {
-		wp_enqueue_style( 'wsu-style-common', get_stylesheet_directory_uri() . '/css/wsu-template.css' );
-		wp_enqueue_style( 'wsu-news-parent-style', get_template_directory_uri() . '/style.css' );
+		wp_enqueue_style( 'wsu-style-common', get_stylesheet_directory_uri() . '/css/wsu-template.css?v=' . $this->script_version );
+		wp_enqueue_style( 'wsu-news-parent-style', get_template_directory_uri() . '/style.css?v=' . $this->script_version );
 	}
 
 	/**
