@@ -9,7 +9,7 @@ class WSU_News_Twentythirteen {
 	/**
 	 * @var string Version of CSS / JS for cache breaking.
 	 */
-	var $script_version = '20140321-03';
+	var $script_version = '20140321-04';
 
 	/**
 	 * Hook in where needed when the theme is loaded.
@@ -52,13 +52,9 @@ class WSU_News_Twentythirteen {
 	 *
 	 * These font-face rules are now included in wsu-template.css so that we
 	 * don't need to go to a new domain to find them.
-	 *
-	 * @todo revisit use of Bitter.
 	 */
 	public function modify_header() {
 		wp_dequeue_style( 'twentythirteen-fonts' );
-		wp_dequeue_style( 'genericons' );
-		//wp_enqueue_style( 'wsu-news-fonts', 'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic|Bitter:400,700|Open+Sans+Condensed:300,700,300italic', array(), null );
 	}
 
 	/**

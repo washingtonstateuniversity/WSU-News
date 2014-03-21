@@ -93,18 +93,6 @@ a:hover {color:#981e32;text-decoration:none;}
 .tint4b{color:#e2f4f8}
 
 @font-face {
-	font-family: 'Bitter';
-	font-style: normal;
-	font-weight: 400;
-	src: local('Bitter-Regular'), url(http://themes.googleusercontent.com/static/fonts/bitter/v5/2PcBT6-VmYhQCus-O11S5-vvDin1pK8aKteLpeZ5c0A.woff) format('woff');
-}
-@font-face {
-	font-family: 'Bitter';
-	font-style: normal;
-	font-weight: 700;
-	src: local('Bitter-Bold'), url(http://themes.googleusercontent.com/static/fonts/bitter/v5/evC1haE-MsorTl_A7_uSGbO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
-}
-@font-face {
 	font-family: 'Open Sans Condensed';
 	font-style: normal;
 	font-weight: 300;
