@@ -40,7 +40,7 @@
 
 </div><!-- #content-->
 </div><!-- #wrapper -->
-<script type='text/javascript' src='//images.wsu.edu/javascripts/tracking/bootstrap_v3.js?gacode=UA-6322839-2&amp;loading=element_v2&amp;domainName=news.wsu.edu/'  id='tracker_agent'></script>
+<script type='text/javascript' src='//news.wsu.edu/bootstrap_v3.js?gacode=UA-6322839-2&amp;loading=element_v2&amp;domainName=news.wsu.edu/'  id='tracker_agent'></script>
 <?php wp_footer(); ?>
 
 <noscript><div id="wsufooter">Copyright &copy;  Board of Regents, <a href="http://www.wsu.edu">Washington State University</a></div>
