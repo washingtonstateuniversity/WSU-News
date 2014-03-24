@@ -30,7 +30,7 @@
 	<![endif]-->
 
 	<!--Cougar Head favicon-->
-	<link rel="shortcut icon" href="http://news.wsu.edu/favicon.ico" />
+	<link rel="shortcut icon" href="//news.wsu.edu/favicon.ico" />
 	<?php wp_head(); ?>
 </head>
 
