@@ -73,6 +73,7 @@ class WSU_News_Twentythirteen {
 	 */
 	public function modify_header() {
 		wp_dequeue_style( 'twentythirteen-fonts' );
+		wp_enqueue_style( 'wsu-news-fonts', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic|Open+Sans+Condensed:300,700,300italic', array(), null );
 	}
 
 	/**
