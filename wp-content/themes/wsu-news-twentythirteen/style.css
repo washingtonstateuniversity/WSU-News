@@ -197,8 +197,6 @@ button, input, textarea{
 
 #siteID{
 	background: #981e32;
-	box-shadow: inset 0 0 150px #262b2d;
-	box-shadow: inset 0 0 150px rgba(0,0,0,.5);
 }
 #wrapper #content #secondary{
 	background: none;
