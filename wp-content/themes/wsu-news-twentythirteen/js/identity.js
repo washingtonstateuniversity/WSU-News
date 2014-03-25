@@ -1,24 +1,13 @@
 (function($,window){
 	var strHeader;
 	var strFooter;
-	var httpsecure;
 	var thedate = new Date().getFullYear();
 
-	function getHttpSecure() {
-		var myURL = location.href;
-		if ( myURL.indexOf( 'https' ) >= 0 ) {
-			httpsecure = 'https'
-		} else {
-			httpsecure = 'http'
-		}
-	}
 	function getHeader() {
-		getHttpSecure();
 		strHeader = '' + '<div id=\'globalnav\'>' + '<ul>' + '<li><a href=\'http://index.wsu.edu/\'>A-Z Index</a></li>' + '<li><a href=\'http://www.about.wsu.edu/statewide/\'>Statewide</a></li>' + '<li><a href=\'https://portal.wsu.edu/\'>zzusis</a></li>' + '<li><a href=\'http://www.wsu.edu/\'>WSU Home</a></li>' + '<li>' + getSearchBar() + '</li>' + '</ul>' + '</div>' + '<div id=\'logo\'><a href=\'http://www.wsu.edu\'><img src=\'//repo.wsu.edu/identity/bg-logo3.jpg\' alt=\'Washington State University - World Class Face to Face\' width=\'185\' height=\'105\' /></a></div><div></div>';
 		return strHeader
 	}
 	function getFooter() {
-		getHttpSecure();
 		strFooter = '' + '<div id=\'wsufooter\'>' + '<a href=\'http://publishing.wsu.edu/copyright/WSU.html\'>&copy; ' + thedate + '</a> ' + '<a href=\'http://www.wsu.edu\'>Washington State University</a> | ' + '<a href=\'http://access.wsu.edu/\'>Accessibility</a> | ' + '<a href=\'http://policies.wsu.edu/\'>Policies</a> | ' + '<a href=\'http://publishing.wsu.edu/copyright/WSU.html\'>Copyright</a>' + '</div>';
 		return strFooter
 	}
