@@ -2,8 +2,8 @@
 	var strHeader;
 	var strFooter;
 	var httpsecure;
-	var thedate = new Date();
-	var thisyear = thedate.getFullYear();
+	var thedate = new Date().getFullYear();
+
 	function getHttpSecure() {
 		var myURL = location.href;
 		if ( myURL.indexOf( 'https' ) >= 0 ) {
@@ -19,7 +19,7 @@
 	}
 	function getFooter() {
 		getHttpSecure();
-		strFooter = '' + '<div id=\'wsufooter\'>' + '<a href=\'http://publishing.wsu.edu/copyright/WSU.html\'>&copy; ' + thedate.getFullYear() + '</a> ' + '<a href=\'http://www.wsu.edu\'>Washington State University</a> | ' + '<a href=\'http://access.wsu.edu/\'>Accessibility</a> | ' + '<a href=\'http://policies.wsu.edu/\'>Policies</a> | ' + '<a href=\'http://publishing.wsu.edu/copyright/WSU.html\'>Copyright</a>' + '</div>';
+		strFooter = '' + '<div id=\'wsufooter\'>' + '<a href=\'http://publishing.wsu.edu/copyright/WSU.html\'>&copy; ' + thedate + '</a> ' + '<a href=\'http://www.wsu.edu\'>Washington State University</a> | ' + '<a href=\'http://access.wsu.edu/\'>Accessibility</a> | ' + '<a href=\'http://policies.wsu.edu/\'>Policies</a> | ' + '<a href=\'http://publishing.wsu.edu/copyright/WSU.html\'>Copyright</a>' + '</div>';
 		return strFooter
 	}
 	function getElementsByClassName( classname, node ) {
