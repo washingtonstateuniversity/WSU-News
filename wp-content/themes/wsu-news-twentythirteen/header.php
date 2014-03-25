@@ -25,6 +25,13 @@
 	<title><?php wp_title( ' |', true, 'right' ); ?> Washington State University</title>
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+
+	<!-- Prefetch DNS records if possible for domains that we'll use. -->
+	<link rel="dns-prefetch" href="//repo.wsu.edu">
+	<link rel="dns-prefetch" href="//images.wsu.edu">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//themes.googleusercontent.com">
+
 	<!--[if lt IE 9]>
 	<script src="<?php echo get_template_directory_uri(); ?>/js/html5.js"></script>
 	<![endif]-->
