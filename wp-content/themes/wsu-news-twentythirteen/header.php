@@ -28,7 +28,6 @@
 
 	<!-- Prefetch DNS records if possible for domains that we'll use. -->
 	<link rel="dns-prefetch" href="//repo.wsu.edu">
-	<link rel="dns-prefetch" href="//images.wsu.edu">
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//themes.googleusercontent.com">
 
