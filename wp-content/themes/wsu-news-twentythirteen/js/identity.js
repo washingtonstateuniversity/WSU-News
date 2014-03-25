@@ -22,18 +22,6 @@
 		strFooter = '' + '<div id=\'wsufooter\'>' + '<a href=\'http://publishing.wsu.edu/copyright/WSU.html\'>&copy; ' + thedate + '</a> ' + '<a href=\'http://www.wsu.edu\'>Washington State University</a> | ' + '<a href=\'http://access.wsu.edu/\'>Accessibility</a> | ' + '<a href=\'http://policies.wsu.edu/\'>Policies</a> | ' + '<a href=\'http://publishing.wsu.edu/copyright/WSU.html\'>Copyright</a>' + '</div>';
 		return strFooter
 	}
-	function getElementsByClassName( classname, node ) {
-		if ( node == '' || node == undefined ) {
-			if ( document.body ) {
-				node = document.body
-			}
-		}
-		var a = [];
-		var re = new RegExp( '\\b' + classname + '\\b' );
-		var els = node.getElementsByTagName( '*' );
-		for ( var i = 0, j = els.length; i < j; i++ )if ( re.test( els[i].className ) )a.push( els[i] );
-		return a
-	}
 	function getImageButton() {
 		var str;
 		str = '<a href=\'#\' onclick=\'document.wsu_headersearch.submit(); return false;\'>';
