@@ -18,6 +18,7 @@ class WSU_News_Twentythirteen {
 		add_action( 'after_setup_theme',  array( $this, 'setup_child_theme' ), 12 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'setup_header'      ),  9 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'modify_header'     ), 21 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts'   ), 22 );
 
 		// Remove default core actions for support of Windows Live Writer.
 		remove_action('wp_head', 'wlwmanifest_link');
@@ -76,6 +77,10 @@ class WSU_News_Twentythirteen {
 		wp_enqueue_style( 'wsu-news-fonts', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic|Open+Sans+Condensed:300,700,300italic', array(), null );
 	}
 
+	public function enqueue_scripts() {
+		wp_enqueue_script( 'wsu-jtrack', 'https://repo.wsu.edu/jtrack/jquery.jTrack.0.2.1.js', array( 'jquery' ), $this->script_version, true );
+		wp_enqueue_script( 'wsu-analytics', get_stylesheet_directory_uri() . '/js/analytics.js', array( 'wsu-jtrack' ), $this->script_version, true );
+	}
 	/**
 	 * Display the entry meta that belongs above content for each item.
 	 */
