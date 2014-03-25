@@ -9,7 +9,7 @@ class WSU_News_Twentythirteen {
 	/**
 	 * @var string Version of CSS / JS for cache breaking.
 	 */
-	var $script_version = '20140325-06';
+	var $script_version = '20140325-07';
 
 	/**
 	 * Hook in where needed when the theme is loaded.
