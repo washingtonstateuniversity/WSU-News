@@ -41,12 +41,6 @@
 		str = str + '</a>';
 		return str
 	}
-	function getSearchBar() {
-		var searchhtml = '<form name=\'wsu_headersearch\' method=\'get\' action=\'http://search.wsu.edu/Default.aspx\' id=\'globalnavsearchform\'><input name=\'cx\' value=\'013644890599324097824:kbqgwamjoxq\' type=\'hidden\'/><input name=\'cof\' value=\'FORID:11\' type=\'hidden\'/> <input name=\'sa\' value=\'Search\' type=\'hidden\'/> <input name=\'fp\' value=\'true\' type=\'hidden\'/> <input class=\'txtsearch2\' name=\'q\' type=\'text\' value=\'Search WSU Web/People\' onClick=\'erasetextbox();\' onBlur=\'checktextbox();\' id=\'my_filter\' />';
-		searchhtml += getImageButton();
-		searchhtml += '</form>';
-		return searchhtml
-	}
 	function checktextbox() {
 		if ( document.wsu_headersearch.my_filter.value.replace( /\s+/g, '' ) == '' ) {
 			document.wsu_headersearch.my_filter.value = 'Search WSU Web/People'
@@ -58,6 +52,12 @@
 			document.wsu_headersearch.my_filter.value = ''
 		}
 		return false
+	}
+	function getSearchBar() {
+		var searchhtml = '<form name=\'wsu_headersearch\' method=\'get\' action=\'http://search.wsu.edu/Default.aspx\' id=\'globalnavsearchform\'><input name=\'cx\' value=\'013644890599324097824:kbqgwamjoxq\' type=\'hidden\'/><input name=\'cof\' value=\'FORID:11\' type=\'hidden\'/> <input name=\'sa\' value=\'Search\' type=\'hidden\'/> <input name=\'fp\' value=\'true\' type=\'hidden\'/> <input class=\'txtsearch2\' name=\'q\' type=\'text\' value=\'Search WSU Web/People\' onClick=\'erasetextbox();\' onBlur=\'checktextbox();\' id=\'my_filter\' />';
+		searchhtml += getImageButton();
+		searchhtml += '</form>';
+		return searchhtml
 	}
 
 	strHeader = getHeader();
