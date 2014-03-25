@@ -60,6 +60,10 @@
 		return searchhtml
 	}
 
+	// Make these public.
+	window.erasetextbox = erasetextbox;
+	window.checktextbox = checktextbox;
+
 	strHeader = getHeader();
 	$('#wrapper' ).prepend(strHeader);
 	strFooter = getFooter();
