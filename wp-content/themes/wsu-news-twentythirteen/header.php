@@ -30,6 +30,8 @@
 	<link rel="dns-prefetch" href="//repo.wsu.edu">
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//themes.googleusercontent.com">
+	<link rel="dns-prefetch" href="//ssl.google-analytics.com">
+	<link rel="dns-prefetch" href="//www.google-analytics.com">
 
 	<!--[if lt IE 9]>
 	<script src="<?php echo get_template_directory_uri(); ?>/js/html5.js"></script>
