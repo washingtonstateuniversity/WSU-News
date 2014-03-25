@@ -44,7 +44,6 @@
 
 <noscript><div id="wsufooter">Copyright &copy;  Board of Regents, <a href="http://www.wsu.edu">Washington State University</a></div>
 </noscript>
-<script language="javascript" type="text/javascript">var strFooter;strFooter = getFooter();document.write(strFooter);</script>
 <!--End of the WSU Global Footer Zone. -->
 
 </body>

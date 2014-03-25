@@ -78,6 +78,7 @@ class WSU_News_Twentythirteen {
 	}
 
 	public function enqueue_scripts() {
+		wp_enqueue_script( 'wsu-identity', get_stylesheet_directory_uri() . '/js/identity.js', array( 'jquery' ), $this->script_version, true );
 		wp_enqueue_script( 'wsu-jtrack', 'https://repo.wsu.edu/jtrack/jquery.jTrack.0.2.1.js', array( 'jquery' ), $this->script_version, true );
 		wp_enqueue_script( 'wsu-analytics', get_stylesheet_directory_uri() . '/js/analytics.js', array( 'wsu-jtrack' ), $this->script_version, true );
 	}
