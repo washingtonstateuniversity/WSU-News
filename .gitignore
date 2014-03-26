@@ -3,6 +3,7 @@
 .idea
 *.sublime*
 /*.sql
+/*.sql.gz
 wordpress
 wp-config.php
 
