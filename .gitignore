@@ -2,7 +2,7 @@
 .DS_Store
 .idea
 *.sublime*
-
+/*.sql
 wordpress
 wp-config.php
 
